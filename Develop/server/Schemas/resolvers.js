@@ -40,19 +40,22 @@ const resolvers = {
             return { token, user };
         },
         //Accepts a book author's array, description, title, bookId, image, and link as parameters; returns a User type. 
+        //*******must pass in bookData instead of args or mutation wont push and will return null.
         //savedBooks [BookSchema] is the array designated in User.js
-        saveBook: async (parent, args, context) => {
+        saveBook: async (parent, { bookData }, context) => {
             if (context.user) {
-                const updatedBook = await User.findByIdAndUpdate(
-                    { _id: context.user._id },
-                    { $push: { savedBooks: args.input } },
-                    { new: true }
-                );
-                return updatedBook;
+              const updatedUser = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $push: { savedBooks: bookData } },
+                { new: true }
+              );
+      
+              return updatedUser;
             }
-
+      
             throw new AuthenticationError('You need to be logged in!');
-        },
+          },
+      
         //Accepts a book's bookId as a parameter; returns a User type.
         removeBook: async (parent, args, context) => {
             if (context.user) {
