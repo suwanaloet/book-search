@@ -66,6 +66,9 @@ const SavedBooks = () => {
       });
 
       console.log(data)
+       if (error) {
+        throw new Error("Something went wrong!");
+      }
 
       //hopefully similar to single thought?
       
