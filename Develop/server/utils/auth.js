@@ -1,22 +1,26 @@
 const jwt = require('jsonwebtoken');
 
-// set token secret and expiration date
+// set token secret and expiration date- changed to 4 hours
 const secret = 'mysecretsshhhhh';
-const expiration = '2h';
+const expiration = '4h';
 
 module.exports = {
   // function for our authenticated routes
-  authMiddleware: function (req, res, next) {
-    // allows token to be sent via  req.query or headers
-    let token = req.query.token || req.headers.authorization;
+  authMiddleware: function ({ req }) {
+    // allows token to be sent via  req.query or headers - removed
+    // let token = req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
+    // allows token to be sent via req.body, req.query, or headers - new
+    let token = req.body.token || req.query.token || req.headers.authorization;
+
+    // ["Bearer", "<tokenvalue>"] - unchanged
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
     }
 
+    // no token? return request
     if (!token) {
-      return res.status(400).json({ message: 'You have no token!' });
+      return req;
     }
 
     // verify token and get user data out of it
@@ -25,12 +29,12 @@ module.exports = {
       req.user = data;
     } catch {
       console.log('Invalid token');
-      return res.status(400).json({ message: 'invalid token!' });
     }
 
-    // send to next endpoint
-    next();
+     // return updated request object
+     return req;
   },
+  // didn't realize it was down here at first, removed the added one up top
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
 

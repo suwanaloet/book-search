@@ -1,14 +1,25 @@
 // see SignupForm.js for comments
+//Replace the loginUser() functionality imported from the API file with the LOGIN_USER mutation functionality.
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
+/* use mutation instead
 import { loginUser } from '../utils/API';
+*/
 import Auth from '../utils/auth';
+
+
+import { useMutation } from '@apollo/react-hooks';
+import { LOGIN_USER } from '../utils/mutations';
+
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  //login mutation
+  const [loginUser, { error }] = useMutation(LOGIN_USER);
+  console.log(error);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -18,7 +29,7 @@ const LoginForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
+    /* check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -40,6 +51,32 @@ const LoginForm = () => {
       setShowAlert(true);
     }
 
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
+    */
+    //try catch instead of promise (again)
+    /*mutation login($email: String!, $password: String!) {
+     login(email: $email, password: $password) {
+       token
+       user {
+         _id
+         username
+       }
+     }
+   }
+   */
+    try {
+      const { data } = await loginUser({
+        variables: { ...userFormData }
+      });
+
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
     setUserFormData({
       username: '',
       email: '',
