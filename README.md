@@ -37,4 +37,4 @@ Client:
 https://github.com/suwanaloet/book-search
 
 ## Deployment link
-https://hidden-citadel-56240.herokuapp.com/
+https://arcane-oasis-77610.herokuapp.com/ | https://git.heroku.com/arcane-oasis-77610.git
