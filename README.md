@@ -4,6 +4,10 @@
 
 Coding refactor of a google books API search engine into a GraphQL API built with Apollo. The app is built using the MERN stack, with React for front end, MongoDB for database, and Express.js and Node.js server and API. 
 
+## Deploy gif
+[Deploy Link] (https://immense-refuge-82406.herokuapp.com/) <br />
+![Image] (https://github.com/suwanaloet/book-search/blob/master/book-search.gif) <br />
+
 ## Necessary Tools
 Root:
 * dev concurrently
@@ -37,4 +41,4 @@ Client:
 https://github.com/suwanaloet/book-search
 
 ## Deployment link
-https://arcane-oasis-77610.herokuapp.com/ | https://git.heroku.com/arcane-oasis-77610.git
+https://immense-refuge-82406.herokuapp.com/
