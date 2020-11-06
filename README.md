@@ -6,7 +6,7 @@ Coding refactor of a google books API search engine into a GraphQL API built wit
 
 ## Deploy gif
 [Deploy Link] (https://immense-refuge-82406.herokuapp.com/) <br />
-![Image] (https://github.com/suwanaloet/book-search/blob/master/book-search.gif) <br />
+![Image](https://github.com/suwanaloet/book-search/blob/master/book-search.gif) <br />
 
 ## Necessary Tools
 Root:
